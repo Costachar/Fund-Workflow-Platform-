@@ -1,5 +1,5 @@
 import { useFund } from '../../context/FundContext'
-import { LayoutDashboard, Lightbulb, Settings, FileText, Users, Rocket, Activity, Check } from 'lucide-react'
+import { LayoutDashboard, Lightbulb, Settings, FileText, Users, Rocket, Activity, GanttChart, Check } from 'lucide-react'
 
 const NAV_ITEMS = [
   { id: 0, label: 'Dashboard', icon: LayoutDashboard },
@@ -9,6 +9,7 @@ const NAV_ITEMS = [
   { id: 4, label: 'Fundraising', icon: Users, stage: 2 },
   { id: 5, label: 'Launch Prep', icon: Rocket, stage: 3 },
   { id: 6, label: 'Operations', icon: Activity, stage: 4 },
+  { id: 7, label: 'Project Plan', icon: GanttChart },
 ]
 
 export default function Sidebar() {

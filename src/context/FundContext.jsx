@@ -122,6 +122,12 @@ const defaultFundData = {
     reviewed: {},
     comments: {},
   },
+
+  // Project Management
+  projectManagement: {
+    tasks: null, // null = use defaults
+    team: null,  // null = use defaults
+  },
 };
 
 const initialState = {
@@ -147,6 +153,7 @@ function loadState() {
           launch: { ...defaultFundData.launch, ...parsed.fundData?.launch },
           operations: { ...defaultFundData.operations, ...parsed.fundData?.operations },
           documents: { ...defaultFundData.documents, ...parsed.fundData?.documents },
+          projectManagement: { ...defaultFundData.projectManagement, ...parsed.fundData?.projectManagement },
         },
       };
     }
@@ -242,6 +249,15 @@ function reducer(state, action) {
               [action.payload.docId]: action.payload.comment,
             },
           },
+        },
+      };
+
+    case 'UPDATE_PROJECT':
+      return {
+        ...state,
+        fundData: {
+          ...state.fundData,
+          projectManagement: { ...state.fundData.projectManagement, ...action.payload },
         },
       };
 

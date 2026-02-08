@@ -7,6 +7,7 @@ import DocumentLibrary from './components/documents/DocumentLibrary'
 import Fundraising from './components/stages/Fundraising'
 import LaunchPrep from './components/stages/LaunchPrep'
 import Operations from './components/stages/Operations'
+import ProjectManagement from './components/project/ProjectManagement'
 import './App.css'
 
 const PAGES = {
@@ -17,6 +18,7 @@ const PAGES = {
   4: { component: Fundraising, title: 'Fundraising', subtitle: 'Track investor pipeline and manage commitments' },
   5: { component: LaunchPrep, title: 'Launch Preparation', subtitle: 'Finalize operational readiness for fund launch' },
   6: { component: Operations, title: 'Ongoing Operations', subtitle: 'Manage documents, compliance calendar, and reporting' },
+  7: { component: ProjectManagement, title: 'Project Management', subtitle: 'Track tasks, timelines, and team workload across all workstreams' },
 }
 
 function App() {
