@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { useFund } from './context/FundContext'
 import Sidebar from './components/layout/Sidebar'
 import Dashboard from './components/dashboard/Dashboard'
@@ -8,6 +9,7 @@ import Fundraising from './components/stages/Fundraising'
 import LaunchPrep from './components/stages/LaunchPrep'
 import Operations from './components/stages/Operations'
 import ProjectManagement from './components/project/ProjectManagement'
+import { Menu } from 'lucide-react'
 import './App.css'
 
 const PAGES = {
@@ -25,11 +27,26 @@ function App() {
   const { state } = useFund()
   const page = PAGES[state.currentStage] || PAGES[0]
   const PageComponent = page.component
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+
+  // Close sidebar on route change (for mobile)
+  useEffect(() => {
+    setSidebarOpen(false)
+  }, [state.currentStage])
 
   return (
     <div className="app-layout">
-      <Sidebar />
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <main className="main-content">
+        <div className="mobile-header">
+          <button className="hamburger-btn" onClick={() => setSidebarOpen(true)}>
+            <Menu size={22} />
+          </button>
+          <div className="mobile-header-logo">
+            <div className="sidebar-logo-icon" style={{ width: 28, height: 28, fontSize: 12 }}>FF</div>
+            <span>FundForge</span>
+          </div>
+        </div>
         <div className="page-header">
           <h2>{page.title}</h2>
           <p>{page.subtitle}</p>

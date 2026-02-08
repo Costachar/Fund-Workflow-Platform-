@@ -346,3 +346,216 @@ input[type="range"]::-webkit-slider-thumb {
 .justify-between { justify-content: space-between; }
 .flex-wrap { flex-wrap: wrap; }
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* ========================================
+   Mobile Header (hidden on desktop)
+   ======================================== */
+.mobile-header {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: white;
+  border-bottom: 1px solid var(--gray-200);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.hamburger-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: var(--radius);
+  color: var(--gray-700);
+  -webkit-tap-highlight-color: transparent;
+}
+.hamburger-btn:hover { background: var(--gray-100); }
+
+.mobile-header-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gray-900);
+}
+
+/* Sidebar close button (hidden on desktop) */
+.sidebar-close-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: var(--radius);
+  color: var(--gray-500);
+  -webkit-tap-highlight-color: transparent;
+}
+.sidebar-close-btn:hover { background: var(--gray-100); color: var(--gray-700); }
+
+/* Sidebar backdrop overlay (hidden on desktop) */
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 99;
+}
+
+/* ========================================
+   Tablet Breakpoint (max-width: 1024px)
+   ======================================== */
+@media (max-width: 1024px) {
+  :root { --sidebar-width: 240px; }
+  .page-content { padding: 20px 24px; }
+  .page-header { padding: 16px 24px; }
+  .metrics-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+}
+
+/* ========================================
+   Mobile Breakpoint (max-width: 768px)
+   ======================================== */
+@media (max-width: 768px) {
+  /* Show mobile header and hide sidebar by default */
+  .mobile-header { display: flex; }
+  .sidebar-close-btn { display: flex; }
+  .sidebar-backdrop { display: block; }
+
+  /* Sidebar becomes an overlay drawer */
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    width: 280px;
+    z-index: 200;
+  }
+  .sidebar.sidebar-open {
+    transform: translateX(0);
+  }
+
+  .sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Main content fills full width */
+  .main-content {
+    margin-left: 0;
+  }
+
+  /* Reduce page spacing */
+  .page-header {
+    padding: 14px 16px;
+  }
+  .page-header h2 { font-size: 18px; }
+  .page-header p { font-size: 13px; }
+
+  .page-content { padding: 16px; }
+
+  /* Cards */
+  .card-header { padding: 12px 16px; }
+  .card-header h3 { font-size: 14px; }
+  .card-body { padding: 16px; }
+
+  /* Metrics grid to 2 columns */
+  .metrics-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .metric-card { padding: 12px 14px; }
+  .metric-value { font-size: 20px; }
+  .metric-label { font-size: 11px; }
+
+  /* Form grids single column */
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Doc grid single column */
+  .doc-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Tables scroll horizontally */
+  table { font-size: 13px; }
+  th, td { padding: 8px 10px; }
+  .card-body:has(table) { padding: 0; overflow-x: auto; }
+
+  /* Tabs scroll horizontally */
+  .tabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { padding: 8px 14px; font-size: 13px; white-space: nowrap; }
+
+  /* Button adjustments */
+  .btn { padding: 8px 14px; font-size: 13px; }
+  .btn-group { flex-wrap: wrap; }
+
+  /* Grid-2 single column on mobile */
+  .grid-2 { grid-template-columns: 1fr; }
+
+  /* Modal fullscreen on mobile */
+  .modal-overlay { padding: 0; align-items: flex-end; }
+  .modal {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 12px 12px 0 0;
+  }
+
+  /* Document preview */
+  .doc-preview { padding: 20px; font-size: 12px; }
+  .doc-preview h1 { font-size: 18px; }
+  .doc-preview .signature-block { grid-template-columns: 1fr; gap: 20px; }
+
+  /* Checklist touch-friendly */
+  .checklist-item { padding: 12px 0; }
+  .checklist-item input[type="checkbox"] { width: 22px; height: 22px; }
+
+  /* Slider thumb bigger for touch */
+  input[type="range"]::-webkit-slider-thumb { width: 24px; height: 24px; }
+
+  /* Empty state */
+  .empty-state { padding: 32px 16px; }
+}
+
+/* ========================================
+   Small Phone Breakpoint (max-width: 480px)
+   ======================================== */
+@media (max-width: 480px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .metric-card {
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .metric-value { font-size: 18px; margin-top: 0; }
+
+  .page-header h2 { font-size: 16px; }
+  .page-content { padding: 12px; }
+
+  .card { margin-bottom: 12px; }
+  .card-header { padding: 10px 12px; }
+  .card-body { padding: 12px; }
+
+  /* Stack button groups vertically */
+  .btn-group {
+    flex-direction: column;
+  }
+  .btn-group .btn { width: 100%; justify-content: center; }
+}
