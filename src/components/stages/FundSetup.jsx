@@ -131,7 +131,7 @@ function KeyParties({ data, update }) {
   return (
     <div className="form-grid">
       <div className="form-group">
-        <label>General Partner (GP) Name</label>
+        <label>Fund Manager Name</label>
         <input value={data.gpName} onChange={(e) => update('gpName', e.target.value)} placeholder="e.g., Apex Capital Management Pty Ltd" />
       </div>
       <div className="form-group full-width">
