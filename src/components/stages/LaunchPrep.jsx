@@ -62,7 +62,7 @@ export default function LaunchPrep() {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 20 }}>
+      <div className="grid-2">
         {/* Go-Live Checklist */}
         <div className="card">
           <div className="card-header"><h3>Go-Live Checklist</h3></div>
@@ -135,7 +135,7 @@ export default function LaunchPrep() {
             <div className="card-body" style={{ fontSize: 13 }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 <div>
-                  <div className="metric-label">General Partner</div>
+                  <div className="metric-label">Fund Manager</div>
                   <div style={{ fontWeight: 500 }}>{setup.gpName || 'Not set'}</div>
                 </div>
                 <div>

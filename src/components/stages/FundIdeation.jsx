@@ -153,7 +153,7 @@ function EconomicsCalculator({ ideation, update, economics }) {
 
             <div className="slider-group">
               <div className="slider-header">
-                <label>GP Commitment</label>
+                <label>Fund Manager Commitment</label>
                 <span className="slider-value">{ideation.gpCommitment}%</span>
               </div>
               <input type="range" min={0} max={10} step={0.5}
@@ -189,7 +189,7 @@ function EconomicsCalculator({ ideation, update, economics }) {
                 className={`toggle ${ideation.catchUp ? 'active' : ''}`}
                 onClick={() => update('catchUp', !ideation.catchUp)}
               />
-              <label style={{ fontSize: 13, fontWeight: 500 }}>GP Catch-Up Provision</label>
+              <label style={{ fontSize: 13, fontWeight: 500 }}>Fund Manager Catch-Up Provision</label>
             </div>
           </div>
         </div>
@@ -208,12 +208,12 @@ function EconomicsCalculator({ ideation, update, economics }) {
           <div className="metric-sub">At {formatPercent(ideation.expectedGrossReturns)} gross return</div>
         </div>
         <div className="metric-card">
-          <div className="metric-label">Total GP Revenue</div>
+          <div className="metric-label">Total Fund Manager Revenue</div>
           <div className="metric-value">{formatCurrency(economics.effectiveGPEconomics.totalGPRevenue)}</div>
           <div className="metric-sub">{formatPercent(economics.effectiveGPEconomics.gpRevenueAsPercentOfFund)} of fund</div>
         </div>
         <div className="metric-card">
-          <div className="metric-label">GP Commitment</div>
+          <div className="metric-label">Fund Manager Commitment</div>
           <div className="metric-value">{formatCurrency(economics.gpCommitAmount)}</div>
           <div className="metric-sub">{formatPercent(ideation.gpCommitment)} of fund</div>
         </div>
@@ -246,8 +246,8 @@ function EconomicsCalculator({ ideation, update, economics }) {
               <thead>
                 <tr>
                   <th>Distribution Step</th>
-                  <th className="text-right">LP Amount</th>
-                  <th className="text-right">GP Amount</th>
+                  <th className="text-right">Investor Amount</th>
+                  <th className="text-right">Fund Manager Amount</th>
                 </tr>
               </thead>
               <tbody>
@@ -310,7 +310,7 @@ function ScenarioAnalysis({ ideation, update, economics }) {
 
       {/* GP vs LP Returns */}
       <div className="card">
-        <div className="card-header"><h3>GP vs LP Returns Comparison</h3></div>
+        <div className="card-header"><h3>Fund Manager vs Investor Returns</h3></div>
         <div className="card-body">
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={economics.scenarios}>
@@ -319,8 +319,8 @@ function ScenarioAnalysis({ ideation, update, economics }) {
               <YAxis tickFormatter={(v) => formatCurrency(v)} />
               <Tooltip formatter={(v) => formatCurrency(v)} />
               <Legend />
-              <Bar dataKey="lpProceeds" name="LP Proceeds" fill={COLORS[0]} radius={[4, 4, 0, 0]} />
-              <Bar dataKey="gpProceeds" name="GP Proceeds" fill={COLORS[2]} radius={[4, 4, 0, 0]} />
+              <Bar dataKey="lpProceeds" name="Investor Proceeds" fill={COLORS[0]} radius={[4, 4, 0, 0]} />
+              <Bar dataKey="gpProceeds" name="Fund Manager Proceeds" fill={COLORS[2]} radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -336,11 +336,11 @@ function ScenarioAnalysis({ ideation, update, economics }) {
                 <tr>
                   <th>Scenario</th>
                   <th className="text-right">Total Proceeds</th>
-                  <th className="text-right">LP Proceeds</th>
-                  <th className="text-right">GP Proceeds</th>
+                  <th className="text-right">Investor Proceeds</th>
+                  <th className="text-right">Fund Manager Proceeds</th>
                   <th className="text-right">Carry</th>
-                  <th className="text-right">LP Multiple</th>
-                  <th className="text-right">GP Multiple</th>
+                  <th className="text-right">Investor Multiple</th>
+                  <th className="text-right">Fund Manager Multiple</th>
                 </tr>
               </thead>
               <tbody>
@@ -364,7 +364,7 @@ function ScenarioAnalysis({ ideation, update, economics }) {
       {/* GP Economics Pie */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
         <div className="card">
-          <div className="card-header"><h3>GP Revenue Breakdown</h3></div>
+          <div className="card-header"><h3>Fund Manager Revenue Breakdown</h3></div>
           <div className="card-body">
             <ResponsiveContainer width="100%" height={250}>
               <PieChart>
@@ -385,7 +385,7 @@ function ScenarioAnalysis({ ideation, update, economics }) {
         </div>
 
         <div className="card">
-          <div className="card-header"><h3>Effective GP Economics</h3></div>
+          <div className="card-header"><h3>Effective Fund Manager Economics</h3></div>
           <div className="card-body">
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <div>
@@ -398,7 +398,7 @@ function ScenarioAnalysis({ ideation, update, economics }) {
                 <div style={{ fontSize: 18, fontWeight: 600 }}>{formatCurrency(economics.expectedWaterfall.carry)}</div>
               </div>
               <div style={{ borderTop: '1px solid var(--gray-200)', paddingTop: 12 }}>
-                <div className="metric-label">Total GP Revenue</div>
+                <div className="metric-label">Total Fund Manager Revenue</div>
                 <div style={{ fontSize: 22, fontWeight: 700, color: 'var(--primary)' }}>
                   {formatCurrency(economics.effectiveGPEconomics.totalGPRevenue)}
                 </div>
@@ -448,11 +448,11 @@ function BusinessCaseSummary({ ideation, economics, dispatch }) {
                   <tr><td>Management Fee</td><td>{formatPercent(ideation.managementFee)}</td></tr>
                   <tr><td>Carry Rate</td><td>{formatPercent(ideation.carryRate)}</td></tr>
                   <tr><td>Hurdle Rate</td><td>{formatPercent(ideation.hurdleRate)}</td></tr>
-                  <tr><td>GP Catch-Up</td><td>{ideation.catchUp ? 'Yes' : 'No'}</td></tr>
-                  <tr><td>GP Commitment</td><td>{formatPercent(ideation.gpCommitment)} ({formatCurrency(economics.gpCommitAmount)})</td></tr>
+                  <tr><td>Fund Manager Catch-Up</td><td>{ideation.catchUp ? 'Yes' : 'No'}</td></tr>
+                  <tr><td>Fund Manager Commitment</td><td>{formatPercent(ideation.gpCommitment)} ({formatCurrency(economics.gpCommitAmount)})</td></tr>
                   <tr><td>Total Management Fees</td><td>{formatCurrency(economics.totalMgmtFees)}</td></tr>
                   <tr><td>Expected Carry</td><td>{formatCurrency(economics.expectedWaterfall.carry)}</td></tr>
-                  <tr style={{ fontWeight: 600 }}><td>Total GP Revenue (Expected)</td><td>{formatCurrency(economics.effectiveGPEconomics.totalGPRevenue)}</td></tr>
+                  <tr style={{ fontWeight: 600 }}><td>Total Fund Manager Revenue (Expected)</td><td>{formatCurrency(economics.effectiveGPEconomics.totalGPRevenue)}</td></tr>
                 </tbody>
               </table>
             </div>

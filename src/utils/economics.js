@@ -108,7 +108,7 @@ function calculateWaterfall(totalProceeds, lpCommitment, gpCommitAmount, hurdleR
     waterfall: [
       { step: 'Return of Capital', lp: lpCapitalReturn, gp: gpCapitalReturn },
       { step: 'Preferred Return', lp: preferredReturn, gp: 0 },
-      { step: 'GP Catch-up', lp: 0, gp: gpCatchUp },
+      { step: 'Fund Manager Catch-up', lp: 0, gp: gpCatchUp },
       { step: 'Carried Interest Split', lp: lpShare, gp: carry },
     ],
   };

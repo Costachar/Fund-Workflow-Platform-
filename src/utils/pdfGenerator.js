@@ -5,7 +5,7 @@ import { formatCurrency, formatPercent, formatDate } from './formatters'
 export function generateTermSheetPDF(fundData) {
   const { setup, ideation } = fundData
   const fundName = setup.fundName || '[Fund Name]'
-  const gpName = setup.gpName || '[GP Name]'
+  const gpName = setup.gpName || '[Fund Manager Name]'
   const doc = new jsPDF()
   let y = 20
 
@@ -66,7 +66,7 @@ export function generateTermSheetPDF(fundData) {
     ['Legal Structure', setup.legalEntityType],
     ['Domicile', setup.domicile],
     ['Fund Type', setup.fundType],
-    ['General Partner', gpName],
+    ['Fund Manager', gpName],
     ['Investment Manager', setup.investmentManager || '[TBD]'],
     ['Fund Administrator', setup.fundAdministrator || '[TBD]'],
   ])
@@ -87,7 +87,7 @@ export function generateTermSheetPDF(fundData) {
     ['Fee Basis', setup.mgmtFeeStructure],
     ['Carried Interest', `${formatPercent(setup.carryPerformanceFee || ideation.carryRate)} of net profits`],
     ['Hurdle Rate', `${formatPercent(setup.hurdleRate || ideation.hurdleRate)} preferred return`],
-    ['Catch-Up', (setup.catchUp ?? ideation.catchUp) ? 'Yes - 100% to GP' : 'None'],
+    ['Catch-Up', (setup.catchUp ?? ideation.catchUp) ? 'Yes - 100% to Fund Manager' : 'None'],
     ['GP Commitment', `${formatPercent(setup.gpCommit || ideation.gpCommitment)} of commitments`],
   ])
 
@@ -182,7 +182,7 @@ export function generateServiceProviderPDF(fundData) {
 
   addSection('Key Parties')
   addTable([
-    ['General Partner', setup.gpName || '[GP Name]'],
+    ['Fund Manager', setup.gpName || '[Fund Manager Name]'],
     ['Investment Manager', setup.investmentManager || '[TBD]'],
     ['Trustee', setup.trustee || '[TBD]'],
   ])
@@ -217,7 +217,7 @@ export function generateServiceProviderPDF(fundData) {
 export function generateSubscriptionPDF(fundData) {
   const { setup, ideation } = fundData
   const fundName = setup.fundName || '[Fund Name]'
-  const gpName = setup.gpName || '[GP Name]'
+  const gpName = setup.gpName || '[Fund Manager Name]'
   const doc = new jsPDF()
   let y = 20
 
@@ -238,7 +238,7 @@ export function generateSubscriptionPDF(fundData) {
 
   doc.setFontSize(10)
   doc.setTextColor(55, 65, 81)
-  doc.text(`TO: ${gpName} (the "General Partner")`, 20, y)
+  doc.text(`TO: ${gpName} (the "Fund Manager")`, 20, y)
   y += 6
   doc.text(`RE: Subscription for interests in ${fundName}`, 20, y)
   y += 10
