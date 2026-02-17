@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy, Suspense } from 'react'
+import { useState, useEffect } from 'react'
 import { useFund } from './context/FundContext'
 import Sidebar from './components/layout/Sidebar'
 import Dashboard from './components/dashboard/Dashboard'
@@ -88,7 +88,7 @@ function App() {
           <p>{page.subtitle}</p>
         </div>
         <div className="page-content">
-          <PageComponent />
+          <PageComponent key={`${currentView}_${state.activeFundId || 'none'}`} />
         </div>
       </main>
     </div>

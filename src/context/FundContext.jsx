@@ -242,13 +242,23 @@ function reducer(state, action) {
 
     // ---- Fund CRUD ----
     case 'CREATE_FUND': {
+      const p = action.payload;
       const newFund = {
         ...defaultFundRecord,
-        ...action.payload,
-        id: action.payload.id || 'fund_' + Date.now(),
+        id: p.id || 'fund_' + Date.now(),
+        fundType: p.fundType || 'standard',
+        fundName: p.fundName || '',
+        status: p.status || 'setup',
+        managers: p.managers || [],
         createdAt: new Date().toISOString(),
-        ideation: { ...defaultIdeation, ...action.payload.ideation },
-        setup: { ...defaultSetup, fundName: action.payload.fundName || '', ...action.payload.setup },
+        stageCompletion: [false, false, false, false, false],
+        ideation: { ...defaultIdeation, ...p.ideation },
+        setup: { ...defaultSetup, fundName: p.fundName || '', ...p.setup },
+        fundraising: { ...defaultFundRecord.fundraising, ...p.fundraising },
+        launch: { ...defaultFundRecord.launch, ...p.launch },
+        operations: { ...defaultFundRecord.operations, ...p.operations },
+        documents: { ...defaultFundRecord.documents, ...p.documents },
+        projectManagement: { ...defaultFundRecord.projectManagement, ...p.projectManagement },
       };
       return {
         ...state,
